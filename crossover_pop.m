@@ -1,6 +1,5 @@
 %...cross_over_pop...
 function child_pop = crossover_pop(parent_pop)
-global opt
 pop_size = size(parent_pop,1);
 child_pop = zeros(size(parent_pop));
 a_ids = 1:pop_size;
@@ -23,10 +22,10 @@ global opt
 child1 = zeros(size(parent1));
 child2 = zeros(size(parent2));
 
-if rand() < opt.p_xover
+if rand() <= opt.p_xover
     for i = 1:opt.n_var
         if rand() < 0.5
-            if norm(parent1(i) - parent2(i)) < 1.0e-6
+            if norm(parent1(i) - parent2(i)) > 1.0e-6
                 if (parent1(i) < parent2(i))
                     y1 = parent1(i);
                     y2 = parent2(i);
@@ -39,7 +38,7 @@ if rand() < opt.p_xover
                 rand_no = rand();
                 beta = 1.0 + (2.0*(y1 - y_L)/(y2 - y_L));
                 alpha = 2.0 - (beta^(-(opt.p_xover + 1)));
-                if (rand_no <= alpha)
+                if (rand_no <= 1/alpha)
                     beta_q = (rand_no*alpha)^(1/(opt.p_xover + 1));
                 else
                     beta_q = (1/(2.0 - rand_no*alpha))^(1/(opt.p_xover + 1));
@@ -48,7 +47,7 @@ if rand() < opt.p_xover
                 
                 beta = 1.0 + (2.0*(y_U-y2)/(y2-y1));
                 alpha = 2.0 - (beta^(-(opt.p_xover + 1)));
-                if (rand_no <= alpha)
+                if (rand_no <= 1/alpha)
                     beta_q = (rand_no*alpha)^(1/(opt.p_xover + 1));
                 else
                     beta_q = (1/(2.0 - rand_no*alpha))^(1/(opt.p_xover + 1));

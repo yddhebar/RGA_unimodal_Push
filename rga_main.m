@@ -35,7 +35,7 @@ end
 
 all_gens = [0:opt.max_gen]';
 semilogy(all_gens,best_value);
-title('Best Value Vs generation');
+title(opt.prob_name);
 xlabel('Generation');
 ylabel('Best Fitness');
 
