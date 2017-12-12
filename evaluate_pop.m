@@ -13,17 +13,15 @@ end
 %.. evald_ind = [n_cons,fitness,total_cons_violation]
 function evald_ind = evaluate_ind(ind)
     global opt
-    n_var = length(ind);
+    x = ind(1:opt.n_var);
+    n_var = opt.n_var;
     evald_ind = zeros(1,opt.n_cons + 1 + 1);%...[constraints, fitness, cons_violation]
     
     switch opt.prob_name
         case 'sphere'
-            vars = ind;
-            func_value = dot(vars,vars);
+            func_value = dot(x,x);
             evald_ind(end - 1) = func_value;
         case 'rastrigin'
-            s = 0;
-            x = ind;
             Ax = dot(x,x);
             Bx = sum(cos(2*pi*x));
             func_value = 10*n_var + Ax - 10*Bx;
@@ -31,4 +29,5 @@ function evald_ind = evaluate_ind(ind)
         otherwise
             disp('Problem not specified or coded')
     end
+
 end

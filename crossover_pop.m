@@ -19,13 +19,14 @@ end
 
 function [child1,child2] = crossover(parent1,parent2)
 global opt
+global g_vars
 child1 = zeros(size(parent1));
 child2 = zeros(size(parent2));
 
 if rand() <= opt.p_xover
     for i = 1:opt.n_var
         if rand() < 0.5
-            if norm(parent1(i) - parent2(i)) > 1.0e-6
+            if norm(parent1(i) - parent2(i)) >= g_vars.EPS
                 if (parent1(i) < parent2(i))
                     y1 = parent1(i);
                     y2 = parent2(i);

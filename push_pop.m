@@ -10,6 +10,7 @@ end
 
 function pushed_ind = push_ind(ind,sink,eta)
 global opt
+global g_vars
 pushed_ind = ind;
 for j = 1:opt.n_var
     a = opt.L_bounds(j);
@@ -17,7 +18,7 @@ for j = 1:opt.n_var
     x = ind(j);
     x_b = sink(j);
     x_pushed = x;
-    if abs(x - x_b) > 1e-6
+    if abs(x - x_b) >= g_vars.EPS
         if (x < x_b) && (x > a)
             x_pushed = a + ((x - a)*(x_b - a)^eta)^(1/(1+eta));
         elseif (x > x_b) && (x < b)
