@@ -2,7 +2,7 @@
 function pushed_pop = push_pop(pop,sink,gen)
 pushed_pop = pop;
 pop_size = size(pop,1);
-eta_push = 0.01*gen;
+eta_push = 0*gen/3000;
 for i = 1:pop_size
     pushed_pop(i,:) = push_ind(pop(i,:),sink,eta_push);
 end

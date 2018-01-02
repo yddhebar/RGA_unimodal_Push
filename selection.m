@@ -34,7 +34,7 @@ function sel_ind = tourselect(ind1,ind2)
         elseif ind2(main_len) < ind1(main_len)
             sel_ind = ind2;
         else
-            r = rand(1,1);
+            r = rand();
             if r < 0.5
                 sel_ind = ind1;
             else

@@ -21,6 +21,21 @@ function evald_ind = evaluate_ind(ind)
         case 'sphere'
             func_value = dot(x,x);
             evald_ind(end - 1) = func_value;
+        case 'ackley'
+            s1 = dot(x,x);
+            cx = cos(2*pi*x);
+            s2 = sum(cx);
+            func_value = -20*exp(-0.2*sqrt(s1/n_var)) -...
+                exp(s2/n_var) + 20 + exp(1);
+            evald_ind(end - 1) = func_value;
+        case 'schwefel'
+            func_value = 0;
+            for i = 1:n_var
+                s = sum(x(1:i));
+                func_value = func_value + s^2;
+            end
+            evald_ind(end - 1) = func_value;
+            
         case 'rastrigin'
             Ax = dot(x,x);
             Bx = sum(cos(2*pi*x));
