@@ -29,7 +29,7 @@ for run = 1:opt.max_runs
         child_pop = mutation_pop(child_pop);
         child_pop = push_pop(child_pop,g_vars.best_ind,gen);
         child_pop = evaluate_pop(child_pop);
-        parent_pop = child_pop;
+        parent_pop = MergeReduce(parent_pop,child_pop);
         best_individual(parent_pop);
         best_value(gen + 1) = g_vars.best_ind(opt.n_var + opt.n_cons + 1);
         fprintf('\t best_value = %f\n',best_value(gen+1));
